@@ -1,0 +1,64 @@
+syntax = "proto3";
+option java_package="org.sid.immatriculation.grpc.stub";
+option java_outer_classname="Imt";
+
+message Owner {
+  string id = 1;
+  string name = 2;
+  double birth_date = 3;
+  string email = 4;
+  repeated Vehicle vehicle = 5;
+
+}
+message Vehicle{
+  int64 id =1;
+  string matricule=2;
+  string marque=3;
+  int64 puissanceFiscale=4;
+  string model=5;
+  Owner owner=6;
+
+}
+
+message OwnersListRequest {
+}
+
+message OwnersListResponse {
+  repeated Owner owners = 1;
+}
+
+message DeleteOwnerRequest {
+  string id = 1;
+}
+
+message DeleteOwnerResponse {
+  bool success = 1;
+}
+message GetOwnerResponse {
+  Owner owners = 1;
+}
+message OwnerByIdRequest{
+  string  id =1;
+}
+message VehicleByIdRequest{
+  int64  id =1;
+}
+message GetVehicleResponse{
+  Vehicle vehicle=1;
+}
+message VehiclesListRequest{
+
+}
+message VehiclesListResponse{
+  repeated Vehicle vehicle=1;
+}
+
+service ImmatriculationService {
+  rpc GetOwnersList(OwnersListRequest) returns (OwnersListResponse);
+  rpc DeleteOwner(DeleteOwnerRequest) returns (DeleteOwnerResponse);
+  rpc GetOwnerById(OwnerByIdRequest) returns (GetOwnerResponse);
+  rpc GetVehicleList(VehiclesListRequest) returns (VehiclesListResponse);
+  rpc GetVehicleById(VehicleByIdRequest) returns (GetVehicleResponse);
+}
+
+
